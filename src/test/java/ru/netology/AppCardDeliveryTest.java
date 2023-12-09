@@ -46,7 +46,6 @@ public class AppCardDeliveryTest {
                 .shouldHave(matchText(date));
 
         String newDate = DataGenerator.getMeetingDate();
-        ;
 
         $("[data-test-id=date] input ").sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         $("[data-test-id=date] input").setValue(newDate);
