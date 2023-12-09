@@ -1,5 +1,6 @@
 package ru.netology;
 
+import com.codeborne.selenide.Condition;
 import com.github.javafaker.Faker;
 import jdk.jfr.DataAmount;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +44,7 @@ public class AppCardDeliveryTest {
 
         $("[data-test-id=success-notification] .notification__content")
                 .shouldBe(visible)
-                .shouldHave(matchText(date));
+                .shouldHave(Condition.text(date));
 
         String newDate = DataGenerator.getMeetingDate();
 
@@ -54,12 +55,11 @@ public class AppCardDeliveryTest {
 
         $("[data-test-id=replan-notification].notification_visible .notification__content")
                 .shouldBe(visible)
-                .shouldBe(matchText("У вас уже запланирована встреча на другую дату. Перепланировать?"));
+                .shouldBe(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"));
 
         $(By.xpath("//*[text()='Перепланировать']")).click();
         $("[data-test-id=success-notification] .notification__content")
                 .shouldBe(visible)
-                .shouldHave(matchText(newDate));
+                .shouldHave(Condition.text(newDate));
     }
-
 }
