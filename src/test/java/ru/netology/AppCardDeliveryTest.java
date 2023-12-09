@@ -27,17 +27,15 @@ public class AppCardDeliveryTest {
 
     @Test
     void shouldSubmitRequest() {
-        UserData testUser = UserData.generate("ru");
-        String name = testUser.getFirstLastName();
-        String phone = testUser.getPhoneNumber();
-        String city = testUser.getCity();
-        String date = testUser.getMeetingDate();
-        $("[data-test-id=city] input").setValue(city);
-        $("[data-test-id=name] input").setValue(name);
+        UserData testUser = DataGenerator.Registration.generateUser();
+        String date = DataGenerator.getMeetingDate();
+
+        $("[data-test-id=city] input").setValue(testUser.getCity());
+        $("[data-test-id=name] input").setValue(testUser.getFirstLastName());
         $("[data-test-id=date] input ").sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         $("[data-test-id=date] input").setValue(date);
 
-        $("[data-test-id=phone] input").setValue(phone);
+        $("[data-test-id=phone] input").setValue(testUser.getPhoneNumber());
         $("[data-test-id=agreement].checkbox").click();
 
         $(By.xpath("//*[text()='Запланировать']")).click();
@@ -47,8 +45,8 @@ public class AppCardDeliveryTest {
                 .shouldBe(visible)
                 .shouldHave(matchText(date));
 
-        testUser.setNewMeetingDate();
-        String newDate = testUser.getMeetingDate();
+        String newDate = DataGenerator.getMeetingDate();
+        ;
 
         $("[data-test-id=date] input ").sendKeys(Keys.CONTROL + "a", Keys.DELETE);
         $("[data-test-id=date] input").setValue(newDate);
@@ -64,4 +62,5 @@ public class AppCardDeliveryTest {
                 .shouldBe(visible)
                 .shouldHave(matchText(newDate));
     }
+
 }

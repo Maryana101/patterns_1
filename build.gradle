@@ -21,6 +21,8 @@ dependencies {
     testImplementation 'com.codeborne:selenide:6.17.1'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.4.1'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 test {
